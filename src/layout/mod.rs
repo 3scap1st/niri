@@ -4797,8 +4797,8 @@ impl<W: LayoutElement> Layout<W> {
                         && idx == *active_monitor_idx
                         && !matches!(self.interactive_move, Some(InteractiveMoveState::Moving(_)));
 
-                    if ongoing_scrolling_dnd.is_some() && self.overview_open {
-                        // Begin the scroll on new monitors and when opening the overview.
+                    if ongoing_scrolling_dnd.is_some() {
+                        // Begin the scroll on new workspaces
                         mon.dnd_scroll_gesture_begin();
                     } else if !self.overview_open {
                         mon.dnd_scroll_gesture_end();
