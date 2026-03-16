@@ -2618,15 +2618,10 @@ impl State {
         // Activate a new confinement if necessary.
         self.niri.maybe_activate_pointer_constraint();
 
-        // Inform the layout of an ongoing DnD operation.
-        let is_dnd_grab = pointer
-            .with_grab(|_, grab| Self::is_dnd_grab(grab.as_any()))
-            .unwrap_or(false);
-        if is_dnd_grab {
-            if let Some((output, pos_within_output)) = self.niri.output_under(new_pos) {
-                let output = output.clone();
-                self.niri.layout.dnd_update(output, pos_within_output);
-            }
+        // Inform the layout of pointer movement for DnD logic.
+        if let Some((output, pos_within_output)) = self.niri.output_under(new_pos) {
+            let output = output.clone();
+            self.niri.layout.dnd_update(output, pos_within_output);
         }
 
         // Redraw to update the cursor position.
