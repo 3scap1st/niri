@@ -1805,10 +1805,10 @@ impl<W: LayoutElement> Monitor<W> {
             return;
         }
 
-        if !self.overview_open {
+//        if !self.overview_open {
             // This gesture is only for the overview.
-            return;
-        }
+//            return;
+//        }
 
         let center_idx = self.active_workspace_idx;
         let current_idx = self.workspace_render_idx();
@@ -1820,7 +1820,7 @@ impl<W: LayoutElement> Monitor<W> {
             animation: None,
             tracker: SwipeTracker::new(),
             is_touchpad: false,
-            is_clamped: false,
+            is_clamped: !self.overview_open,
             dnd_last_event_time: Some(self.clock.now_unadjusted()),
             dnd_nonzero_start_time: None,
         };
